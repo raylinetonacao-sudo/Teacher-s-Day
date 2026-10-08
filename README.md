@@ -1,350 +1,822 @@
-https://raylinetonacao-sudo.github.io/Teacher-s-Day/# 💙 Teacher's Day Letter — Sir Randy Bello
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-A beautiful, interactive **Teacher's Day digital letter** created for **Sir Randy Bello**, a Web Development instructor.
+    <title>Happy Teacher's Day, Sir Randy Bello 💙</title>
 
-The project combines **HTML, CSS, and JavaScript in a single HTML file**, making it easy to run and share without installing any libraries or dependencies.
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
----
+        :root {
+            --bg: #eaf7ff;
+            --bg-secondary: #d8f0ff;
+            --card: rgba(255, 255, 255, 0.82);
+            --text: #23445c;
+            --heading: #1976a8;
+            --accent: #5bbce9;
+            --accent-dark: #278bbd;
+            --white: #ffffff;
+            --shadow: rgba(40, 130, 180, 0.2);
+        }
 
-## 🌸 Preview
+        body.dark {
+            --bg: #101c2b;
+            --bg-secondary: #172a3d;
+            --card: rgba(25, 42, 59, 0.9);
+            --text: #dcefff;
+            --heading: #79cdf5;
+            --accent: #4baedc;
+            --accent-dark: #8dd9fa;
+            --white: #eaf8ff;
+            --shadow: rgba(0, 0, 0, 0.45);
+        }
 
-The website features a light-blue Teacher's Day design with:
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(91,188,233,.25), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,.5), transparent 25%),
+                linear-gradient(135deg, var(--bg), var(--bg-secondary));
+            color: var(--text);
+            transition: background 0.7s ease, color 0.5s ease;
+        }
 
-* 💌 Interactive envelope
-* 🌷 Flowers and decorative elements
-* 🎈 Floating balloons
-* 💙 Light-blue color theme
-* 🌙 Dark mode / ☀️ Light mode
-* ✨ Smooth animations and transitions
-* 💖 Floating hearts when the letter opens
-* 📱 Responsive mobile design
-* ⌨️ Keyboard interaction
-* 💻 No external libraries required
+        /* -----------------------------
+           THEME BUTTON
+        ----------------------------- */
 
----
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 52px;
+            height: 52px;
+            border: none;
+            border-radius: 50%;
+            background: var(--card);
+            color: var(--heading);
+            box-shadow: 0 8px 25px var(--shadow);
+            cursor: pointer;
+            font-size: 1.4rem;
+            backdrop-filter: blur(10px);
+            transition: transform .3s ease, background .5s ease;
+        }
 
-## 📁 Project Structure
+        .theme-toggle:hover {
+            transform: rotate(20deg) scale(1.1);
+        }
 
-The project can be kept extremely simple:
+        /* -----------------------------
+           BACKGROUND DECORATIONS
+        ----------------------------- */
 
-```text
-teachers-day-letter/
-│
-├── index.html
-└── README.md
+        .background-decoration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,.28);
+            animation: floatBubble 8s infinite ease-in-out;
+        }
+
+        .bubble:nth-child(1) {
+            width: 90px;
+            height: 90px;
+            left: 8%;
+            top: 20%;
+        }
+
+        .bubble:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            left: 75%;
+            top: 30%;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 120px;
+            height: 120px;
+            left: 82%;
+            top: 75%;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatBubble {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        /* -----------------------------
+           BALLOONS
+        ----------------------------- */
+
+        .balloon {
+            position: fixed;
+            width: 55px;
+            height: 68px;
+            border-radius: 50% 50% 45% 45%;
+            z-index: 1;
+            opacity: .85;
+            animation: balloonFloat 7s ease-in-out infinite;
+        }
+
+        .balloon::before {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 120px;
+            background: rgba(80,80,80,.35);
+            top: 65px;
+            left: 50%;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 22px;
+            width: 12px;
+            height: 12px;
+            background: inherit;
+            transform: rotate(45deg);
+        }
+
+        .balloon.blue {
+            background: #67c8f0;
+            left: 4%;
+            bottom: 8%;
+        }
+
+        .balloon.pink {
+            background: #f5a8c7;
+            right: 5%;
+            top: 18%;
+            animation-delay: 1.5s;
+        }
+
+        .balloon.yellow {
+            background: #f8d77b;
+            left: 88%;
+            bottom: 15%;
+            animation-delay: 3s;
+        }
+
+        @keyframes balloonFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(-3deg);
+            }
+            50% {
+                transform: translateY(-25px) rotate(5deg);
+            }
+        }
+
+        /* -----------------------------
+           FLOWERS
+        ----------------------------- */
+
+        .flower {
+            position: fixed;
+            z-index: 2;
+            font-size: 2.5rem;
+            animation: flowerFloat 6s ease-in-out infinite;
+            user-select: none;
+        }
+
+        .flower.one {
+            left: 3%;
+            top: 10%;
+        }
+
+        .flower.two {
+            right: 3%;
+            bottom: 7%;
+            animation-delay: 2s;
+        }
+
+        .flower.three {
+            right: 7%;
+            top: 7%;
+            animation-delay: 1s;
+        }
+
+        .flower.four {
+            left: 8%;
+            bottom: 20%;
+            animation-delay: 3s;
+        }
+
+        @keyframes flowerFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(8deg);
+            }
+        }
+
+        /* -----------------------------
+           MAIN CONTAINER
+        ----------------------------- */
+
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 70px 20px;
+        }
+
+        .content {
+            width: min(900px, 100%);
+            text-align: center;
+        }
+
+        .subtitle {
+            color: var(--heading);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            animation: fadeDown 1s ease;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 7vw, 5rem);
+            color: var(--heading);
+            line-height: 1.05;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 20px var(--shadow);
+            animation: fadeDown 1.2s ease;
+        }
+
+        .teacher-name {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 35px;
+            animation: fadeDown 1.4s ease;
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* -----------------------------
+           ENVELOPE
+        ----------------------------- */
+
+        .envelope-wrapper {
+            position: relative;
+            width: min(680px, 95%);
+            height: 430px;
+            margin: 20px auto;
+            perspective: 1200px;
+        }
+
+        .envelope {
+            position: absolute;
+            inset: 0;
+            background: #8fd8f6;
+            border-radius: 15px;
+            box-shadow: 0 25px 60px var(--shadow);
+            overflow: visible;
+            cursor: pointer;
+            transition: transform .8s ease;
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
+        }
+
+        .envelope-body {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #92dff9, #62bfe7);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .envelope-body::before,
+        .envelope-body::after {
+            content: "";
+            position: absolute;
+            width: 70%;
+            height: 2px;
+            background: rgba(255,255,255,.55);
+        }
+
+        .envelope-body::before {
+            left: -10%;
+            bottom: 28%;
+            transform: rotate(32deg);
+        }
+
+        .envelope-body::after {
+            right: -10%;
+            bottom: 28%;
+            transform: rotate(-32deg);
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: #a5e3fa;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top center;
+            transition: transform 1.2s cubic-bezier(.68,-.55,.27,1.55);
+            z-index: 5;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .seal {
+            position: absolute;
+            z-index: 10;
+            left: 50%;
+            top: 53%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,.15);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+        /* -----------------------------
+           LETTER
+        ----------------------------- */
+
+        .letter {
+            position: absolute;
+            z-index: 3;
+            left: 5%;
+            top: 5%;
+            width: 90%;
+            height: 90%;
+            background: var(--card);
+            backdrop-filter: blur(15px);
+            border-radius: 12px;
+            padding: 35px;
+            overflow-y: auto;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(80px);
+            transition:
+                transform 1.2s ease,
+                opacity .8s ease;
+            box-shadow: 0 10px 35px rgba(0,0,0,.1);
+        }
+
+        .letter h2 {
+            text-align: center;
+            color: var(--heading);
+            margin-bottom: 22px;
+            font-size: 1.8rem;
+        }
+
+        .letter p {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 18px;
+        }
+
+        .signature {
+            margin-top: 25px;
+            text-align: right;
+            font-weight: bold;
+            color: var(--heading);
+            font-size: 1.15rem;
+        }
+
+        /* OPEN STATE */
+
+        .envelope.open .flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope.open .letter {
+            opacity: 1;
+            transform: translateY(-35px);
+        }
+
+        .envelope.open .seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .envelope.open {
+            margin-top: 40px;
+        }
+
+        /* -----------------------------
+           BUTTON
+        ----------------------------- */
+
+        .open-button {
+            border: none;
+            padding: 14px 28px;
+            margin-top: 30px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px var(--shadow);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .open-button:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .open-button:active {
+            transform: scale(.97);
+        }
+
+        /* -----------------------------
+           FOOTER
+        ----------------------------- */
+
+        .footer {
+            margin-top: 35px;
+            color: var(--text);
+            opacity: .75;
+            font-size: .9rem;
+        }
+
+        /* -----------------------------
+           HEARTS
+        ----------------------------- */
+
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            pointer-events: none;
+            animation: heartFloat 4s linear forwards;
+            z-index: 50;
+        }
+
+        @keyframes heartFloat {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-150px) scale(1.8) rotate(20deg);
+            }
+        }
+
+        /* -----------------------------
+           MOBILE
+        ----------------------------- */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 80px 10px 40px;
+            }
+
+            .envelope-wrapper {
+                height: 520px;
+            }
+
+            .letter {
+                padding: 25px 20px;
+            }
+
+            .letter p {
+                font-size: .95rem;
+                line-height: 1.65;
+            }
+
+            .balloon {
+                transform: scale(.7);
+            }
+
+            .flower {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Theme Switch -->
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+        🌙
+    </button>
+
+    <!-- Decorative Background -->
+    <div class="background-decoration">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Balloons -->
+    <div class="balloon blue"></div>
+    <div class="balloon pink"></div>
+    <div class="balloon yellow"></div>
+
+    <!-- Flowers -->
+    <div class="flower one">🌸</div>
+    <div class="flower two">🌷</div>
+    <div class="flower three">🌼</div>
+    <div class="flower four">🌺</div>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <section class="content">
+
+            <div class="subtitle">
+                A Special Message For
+            </div>
+
+            <h1>
+                Happy Teacher's Day! 💙
+            </h1>
+
+            <div class="teacher-name">
+                To Sir Randy Bello 🌷
+            </div>
+
+            <!-- Envelope -->
+            <div class="envelope-wrapper">
+
+                <div class="envelope" id="envelope">
+
+                    <div class="envelope-body"></div>
+
+                    <!-- Letter -->
+                    <article class="letter">
+
+                        <h2>
+                            Dear Sir Randy Bello, 💙
+                        </h2>
+
+                        <p>
+                            Happy Teacher's Day, Sir!
+                        </p>
+
+                        <p>
+                            Today is a special day to appreciate the teachers
+                            who do more than simply teach lessons. Thank you
+                            for sharing your knowledge, patience, experience,
+                            and passion with us.
+                        </p>
+
+                
+
+                        <p>
+                            Every line of code we write is a small step toward
+                            becoming better developers, and your guidance has
+                            made that journey more meaningful.
+                        </p>
+
+                        <p>
+                            We truly appreciate the time and effort you give
+                            to your students. Behind every lesson, activity,
+                            correction, and explanation is a teacher who wants
+                            us to improve and succeed.
+                        </p>
+
+                        <p>
+                            May you continue inspiring students to learn,
+                            create, and believe in what they can accomplish.
+                            Your lessons will remain a part of the skills and
+                            memories we carry with us.
+                        </p>
+
+                        <p>
+                            Thank you for being a great teacher and mentor.
+                            We are grateful for everything you do.
+                        </p>
+
+                        <p>
+                            Wishing you a wonderful Teacher's Day filled with
+                            happiness, appreciation, and well-deserved
+                            recognition. 🌸🎈
+                        </p>
+
+                        <div class="signature">
+                            With gratitude and respect,<br>
+                            Your Student 💙
+                        </div>
+
+                    </article>
+
+                    <!-- Envelope Flap -->
+                    <div class="flap"></div>
+
+                    <!-- Seal -->
+                    <div class="seal">
+                        💙
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="open-button" id="openButton">
+                💌 Open Your Letter
+            </button>
+
+            <div class="footer">
+                Made with gratitude, appreciation, and a little bit of code. 💻💙
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+
+        const envelope = document.getElementById("envelope");
+        const openButton = document.getElementById("openButton");
+        const themeToggle = document.getElementById("themeToggle");
+
+        let isOpen = false;
+
+        /* --------------------------------
+           OPEN / CLOSE LETTER
+        -------------------------------- */
+
+        function toggleLetter() {
+
+            isOpen = !isOpen;
+
+            envelope.classList.toggle("open", isOpen);
+
+            if (isOpen) {
+                openButton.innerHTML = "💙 Close Letter";
+
+                // Create floating hearts
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(createHeart, i * 120);
+                }
+
+            } else {
+                openButton.innerHTML = "💌 Open Your Letter";
+            }
+        }
+
+        envelope.addEventListener("click", toggleLetter);
+        openButton.addEventListener("click", toggleLetter);
+
+
+        /* --------------------------------
+           DARK / LIGHT MODE
+        -------------------------------- */
+
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+                themeToggle.textContent = "☀️";
+                themeToggle.title = "Switch to light mode";
+            } else {
+                themeToggle.textContent = "🌙";
+                themeToggle.title = "Switch to dark mode";
+            }
+
+        });
+
+
+        /* --------------------------------
+           FLOATING HEART EFFECT
+        -------------------------------- */
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            const hearts = ["💙", "💖", "💗", "🌸", "✨"];
+
+            heart.textContent =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.top =
+                60 + Math.random() * 30 + "vh";
+
+            heart.style.fontSize =
+                15 + Math.random() * 20 + "px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+
+        /* --------------------------------
+           AUTOMATIC FLOATING FLOWERS
+        -------------------------------- */
+
+        setInterval(() => {
+
+            const flower = document.createElement("div");
+
+            flower.className = "heart";
+
+            const flowers = [
+                "🌸",
+                "🌷",
+                "🌼",
+                "🌺",
+                "💠"
+            ];
+
+            flower.textContent =
+                flowers[Math.floor(Math.random() * flowers.length)];
+
+            flower.style.left =
+                Math.random() * 100 + "vw";
+
+            flower.style.top = "100vh";
+
+            flower.style.fontSize =
+                18 + Math.random() * 18 + "px";
+
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 4000);
+
+        }, 1300);
+
+
+        /* --------------------------------
+           KEYBOARD ACCESSIBILITY
+        -------------------------------- */
+
+        document.addEventListener("keydown", (event) => {
+
+            if (event.key === "Enter" && document.activeElement === openButton) {
+                toggleLetter();
+            }
+
+            if (event.key.toLowerCase() === "d") {
+                document.body.classList.toggle("dark");
+
+                if (document.body.classList.contains("dark")) {
+                    themeToggle.textContent = "☀️";
+                } else {
+                    themeToggle.textContent = "🌙";
+                }
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
 ```
-
-### `index.html`
-
-Contains everything required for the website:
-
-* HTML structure
-* CSS styling
-* Animations
-* JavaScript functionality
-* Teacher's Day message
-
-The page title is set to **"Happy Teacher's Day, Sir Randy Bello 💙"**.
-
----
-
-## 🚀 How to Run
-
-### 1. Download or copy the HTML file
-
-Save the webpage as:
-
-```text
-index.html
-```
-
-### 2. Open the file
-
-Double-click `index.html`.
-
-It will open directly in your web browser.
-
-No server or installation is required.
-
-### 3. Enjoy the letter 💙
-
-Click:
-
-```text
-💌 Open Your Letter
-```
-
-to open the envelope and reveal the message.
-
----
-
-## 💌 Letter Animation
-
-The project uses a CSS 3D animation to open the envelope.
-
-When the envelope receives the `open` class, the flap rotates and the letter becomes visible.
-
-The opening interaction is controlled by JavaScript through the `toggleLetter()` function.
-
-The button changes between:
-
-```text
-💌 Open Your Letter
-```
-
-and:
-
-```text
-💙 Close Letter
-```
-
----
-
-## 🌙 Dark Mode
-
-The website includes a light/dark theme switch.
-
-Click the button in the upper-right corner:
-
-```text
-🌙
-```
-
-to activate dark mode.
-
-It changes the interface to a darker blue theme and switches the button to:
-
-```text
-☀️
-```
-
-The dark theme is implemented using CSS variables and the `.dark` class.
-
-JavaScript controls the theme switch.
-
----
-
-## 🎈 Decorations
-
-The website includes animated:
-
-### Balloons
-
-Three balloons are included:
-
-* 💙 Blue
-* 💗 Pink
-* 💛 Yellow
-
-They gently move up and down using CSS keyframe animation.
-
-### Flowers
-
-Decorative flowers include:
-
-* 🌸 Cherry blossom
-* 🌷 Tulip
-* 🌼 Flower
-* 🌺 Hibiscus
-
-They have a gentle floating and rotating animation.
-
----
-
-## ✨ Floating Effects
-
-When the letter opens, floating hearts and other decorative emojis appear on the screen.
-
-The JavaScript dynamically creates these elements and removes them after their animation finishes.
-
-The page also continuously generates floating flowers for an additional animated effect.
-
----
-
-## 📱 Responsive Design
-
-The website is designed to work on:
-
-* 💻 Desktop
-* 💻 Laptop
-* 📱 Mobile phone
-* 📲 Tablet
-
-A CSS media query adjusts the envelope, letter padding, text size, balloons, and flowers for smaller screens.
-
----
-
-## ⌨️ Keyboard Controls
-
-The project includes a small keyboard accessibility feature.
-
-### Enter
-
-When the **Open Your Letter** button is focused, pressing:
-
-```text
-Enter
-```
-
-opens or closes the letter.
-
-### D
-
-Press:
-
-```text
-D
-```
-
-to toggle between dark and light mode.
-
----
-
-## 🛠️ Technologies Used
-
-### HTML5
-
-Used to create the structure and content of the Teacher's Day letter.
-
-### CSS3
-
-Used for:
-
-* Layout
-* Colors
-* Gradients
-* Responsive design
-* Transitions
-* Animations
-* 3D envelope opening
-* Dark mode
-
-### JavaScript
-
-Used for:
-
-* Opening and closing the envelope
-* Dark/light mode
-* Floating hearts
-* Floating flowers
-* Keyboard controls
-
----
-
-## 🎨 Color Theme
-
-The primary design uses a soft light-blue palette.
-
-Some of the main colors include:
-
-```css
---bg: #eaf7ff;
---bg-secondary: #d8f0ff;
---heading: #1976a8;
---accent: #5bbce9;
---accent-dark: #278bbd;
-```
-
-These colors create the soft blue Teacher's Day aesthetic used throughout the page.
-
----
-
-## ✏️ Personalizing the Letter
-
-To change the recipient's name, look for:
-
-```html
-<div class="teacher-name">
-    To Sir Randy Bello 🌷
-</div>
-```
-
-You can replace the name with another teacher's name.
-
-You can also edit the main letter inside:
-
-```html
-<article class="letter">
-```
-
-For example:
-
-```html
-<div class="signature">
-    With gratitude and respect,<br>
-    Your Student 💙
-</div>
-```
-
-Replace **Your Student** with your name, section, or class.
-
----
-
-## 📦 Dependencies
-
-There are **no external dependencies**.
-
-You do not need:
-
-* npm
-* Node.js
-* Bootstrap
-* jQuery
-* React
-* Tailwind CSS
-* External JavaScript libraries
-
-Everything is contained inside the HTML document.
-
----
-
-## 🌐 Browser Compatibility
-
-The project is intended for modern browsers such as:
-
-* Google Chrome
-* Microsoft Edge
-* Mozilla Firefox
-* Safari
-
-For the best visual experience, use an up-to-date browser.
-
----
-
-## ❤️ Purpose
-
-This project was created as a digital Teacher's Day greeting to express appreciation for:
-
-**Sir Randy Bello**
-
-and his effort, patience, guidance, and dedication as a Web Development instructor.
-
-The letter specifically recognizes the lessons involving:
-
-**HTML + CSS + JavaScript**
-
-as well as creativity, problem-solving, patience, and continuous learning.
-
----
-
-## 👨‍💻 Author
-
-Created with:
-
-**HTML • CSS • JavaScript • 💙 Appreciation**
-
-Made especially for **Sir Randy Bello**.
-
----
-
-## 📜 License
-
-This project is intended for **personal, educational, and school-project use**.
-
-Feel free to modify the message, colors, animations, and design to make it your own.
-
----
-
-### 💙 Happy Teacher's Day, Sir Randy Bello!
-
-> "Made with gratitude, appreciation, and a little bit of code." 💻💙
